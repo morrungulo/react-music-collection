@@ -1,0 +1,37 @@
+@schema = http
+@hostname = localhost
+@backend = {{schema}}://{{hostname}}:5000
+@musicapi = api/v1/music
+
+###
+
+GET {{backend}}/{{musicapi}}/
+
+###
+
+GET {{backend}}/{{musicapi}}/626017d3196044bd6a3a8941
+
+###
+
+POST {{backend}}/{{musicapi}}
+Content-Type: application/json
+
+{
+    "name": "oi",
+    "artist": "oi",
+    "image": "image",
+    "songs": [
+        {
+            "number": 1,
+            "title": "it is what it is"
+        },
+        {
+            "number": 2,
+            "title": "it is what it is not"
+        }
+    ]
+}
+
+###
+
+DELETE {{backend}}/{{musicapi}}/626017d3196044bd6a3a8941
