@@ -1,0 +1,17 @@
+version: "3.7"
+
+services:
+  backend:
+    build: ../backend
+    restart: unless-stopped
+    ports:
+      - ${BACKEND_PORT:-3000}:3000
+    depends_on:
+      - mongodb
+    environment:
+      NODE_ENV: ${NODE_ENV:-development}
+      MONGODB_HOST: ${MONGODB_HOST:?must be present}
+      MONGODB_PORT: ${MONGODB_PORT:?must be present}
+      MONGODB_DBNAME: ${MONGODB_DBNAME:?must be present}
+    networks:
+      - ${GLOBAL_NETWORK:-backend}

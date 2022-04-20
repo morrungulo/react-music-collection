@@ -1,0 +1,22 @@
+version: "3.7"
+
+services:
+  mongodb:
+    image: mongo:${MONGODB_VERSION:-latest}
+    hostname: ${MONGODB_HOST:-mongodb}
+    command: mongod --port ${MONGODB_PORT:-27020}
+    restart: unless-stopped
+    ports:
+      - ${MONGODB_PORT:-27020}:${MONGODB_PORT:-27020}
+    volumes:
+      - music_data:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: ${MONGODB_DBNAME:-music_db}
+      # MONGO_INITDB_ROOT_USERNAME: ${MONGODB_USERNAME:-username}
+      # MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_PASSWORD:-password}
+    networks:
+      - ${GLOBAL_NETWORK:-mongodb}
+
+volumes:
+  music_data:
+    driver: local
