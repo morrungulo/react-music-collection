@@ -1,6 +1,6 @@
 @schema = http
 @hostname = localhost
-@backend = {{schema}}://{{hostname}}:5000
+@backend = {{schema}}://{{hostname}}:3000
 @musicapi = api/v1/music
 
 ###
@@ -9,17 +9,18 @@ GET {{backend}}/{{musicapi}}/
 
 ###
 
-GET {{backend}}/{{musicapi}}/626017d3196044bd6a3a8941
+GET {{backend}}/{{musicapi}}/62612635ffb8d418d8700fec
 
 ###
 
 POST {{backend}}/{{musicapi}}
 Content-Type: application/json
+Prefer: return=representation
 
 {
     "name": "oi",
     "artist": "oi",
-    "image": "image",
+    "image": "https://www.example.com/some/dir/somefile.png",
     "songs": [
         {
             "number": 1,
@@ -35,3 +36,24 @@ Content-Type: application/json
 ###
 
 DELETE {{backend}}/{{musicapi}}/626017d3196044bd6a3a8941
+
+
+###
+
+PATCH {{backend}}/{{musicapi}}/62612635ffb8d418d8700fec
+Content-Type: application/json
+Prefer: return=Minimal
+
+{
+    "rating": 2,
+    "favorite": true
+}
+
+###
+
+PATCH {{backend}}/{{musicapi}}/62612635ffb8d418d8700fec
+Content-Type: application/json
+
+{
+    "favorite": true
+}

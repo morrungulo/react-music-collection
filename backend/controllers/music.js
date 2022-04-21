@@ -1,17 +1,6 @@
+const _ = require('lodash')
+const { AlbumNotFoundError, AlbumValidationError } = require("../errors")
 const Album = require("../models/album")
-
-class AlbumValidationError extends Error {
-  constructor(message) {
-    super(message)
-    this.status = 400
-  }
-}
-class AlbumNotFoundError extends Error {
-  constructor() {
-    super('invalid album')
-    this.status = 400
-  }
-}
 
 const resultOk = (data) => {
   return {
@@ -52,15 +41,10 @@ const get_album = (req, res, next) => {
 }
 
 const post_add_album = (req, res, next) => {
-  const { name, artist, image, songs } = req.body
-  Album.create({
-    name,
-    artist,
-    image,
-    songs,
-  })
+  const body = _.pick(req.body, ['name', 'artist', 'image', 'songs', 'rating', 'favorite'])
+  Album.create(body)
     .then(album => {
-      res.status(201).json(resultOk(album))
+      res.status(201).json(req.minimal ? resultOkNoData() : resultOk(album))
     })
     .catch(err => next(new AlbumValidationError(err.message)))
 }
@@ -75,9 +59,21 @@ const delete_album = (req, res, next) => {
     .catch(err => next(new AlbumNotFoundError()))
 }
 
+const patch_album = (req, res, next) => {
+  const { id } = req.params;
+  const body = _.pick(req.body, ['name', 'artist', 'image', 'rating', 'favorite'])
+  Album.findByIdAndUpdate(id, { $set: body }, { new: !req.minimal })
+    .then(album => {
+      const result = album === null ? resultNotOk("unknown album") : req.minimal ? resultOkNoData() : resultOk(album)
+      res.status(200).json(result)
+    })
+    .catch(err => next(new AlbumNotFoundError()))
+}
+
 module.exports = {
   get_all_albums,
   get_album,
   post_add_album,
   delete_album,
+  patch_album,
 }

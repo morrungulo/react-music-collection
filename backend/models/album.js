@@ -11,7 +11,7 @@ const songSchema = new mongoose.Schema({
   number: {
     type: Number,
     required: [true, requiredMessage],
-  }
+  },
 });
 
 const albumSchema = new mongoose.Schema({
@@ -31,6 +31,16 @@ const albumSchema = new mongoose.Schema({
   image: {
     type: String,
     trim: true
+  },
+
+  rating: {
+    type: Number,
+    default: 0
+  },
+
+  favorite: {
+    type: Boolean,
+    default: false,
   },
 
   songs: [songSchema]
