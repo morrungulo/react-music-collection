@@ -1,6 +1,6 @@
 @schema = http
 @hostname = localhost
-@backend = {{schema}}://{{hostname}}:3000
+@backend = {{schema}}://{{hostname}}:4000
 @musicapi = api/v1/music
 
 ###
