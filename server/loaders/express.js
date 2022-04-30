@@ -10,7 +10,6 @@ module.exports = {
             // middleware & static files
             expressApp.use(express.json());
             expressApp.use(express.urlencoded({ extended: true }));
-            expressApp.use(express.static('public'))
             expressApp.use(cors());
 
             // the api

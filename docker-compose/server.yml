@@ -2,10 +2,10 @@ version: "3.7"
 
 services:
   backend:
-    build: ../backend
+    build: ../server
     restart: unless-stopped
     ports:
-      - ${BACKEND_PORT:-3000}:3000
+      - ${SERVER_PORT:-3000}:3000
     depends_on:
       - mongodb
     environment:
@@ -14,4 +14,4 @@ services:
       MONGODB_PORT: ${MONGODB_PORT:?must be present}
       MONGODB_DBNAME: ${MONGODB_DBNAME:?must be present}
     networks:
-      - ${GLOBAL_NETWORK:-backend}
+      - ${GLOBAL_NETWORK:-server}
