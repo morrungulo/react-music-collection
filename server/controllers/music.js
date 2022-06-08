@@ -49,7 +49,7 @@ const post_add_album = async (req, res, next) => {
     const result = req.minimal ? resultOkNoData() : resultOk(album)
     res.status(201).json(result)
   } catch (error) {
-    next(new AlbumValidationError(err.message))
+    next(new AlbumValidationError(error.message))
   }
 }
 
