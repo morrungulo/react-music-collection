@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const spotifyRapidApi = () => axios.create({
+const spotifyRapidApi = axios.create({
   baseURL: 'https://spotify23.p.rapidapi.com/',
   headers: {
     accept: 'application/json',
