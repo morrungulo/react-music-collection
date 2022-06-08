@@ -1,16 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
-const useApi = (task) => {
+const useApi = (callbackFn) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    task()
+    callbackFn()
       .then(response => {
-        if (!response.ok) {
-          throw Error("Could not fetch data");
-        }
         setData(response.data)
         setError(null)
       })
@@ -21,7 +18,7 @@ const useApi = (task) => {
       .finally(() => {
         setLoading(false)
       })
-  }, [task]);
+  }, [callbackFn]);
 
   return { data, loading, error };
 }

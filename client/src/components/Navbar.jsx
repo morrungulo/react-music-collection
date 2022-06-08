@@ -5,19 +5,19 @@ import Logo from '../assets/cds.png'
 const Navbar = () => {
   const [nav, setNav] = useState(false)
 
-  const handleClick = () => setNav(val => !val)
-
   return (
-    <div className='fixed w-full h-[95px] flex justify-between items-center px-6 text-gray-300'>
+    <div className='fixed w-full h-[95px] flex justify-between items-center px-9 text-gray-300'>
 
-      {/* logo */}
-      <div className="w-[120px]">
-        <img src={Logo} alt='logo' />
-      </div>
+      <div className="flex justify-start items-center">
+        {/* logo */}
+        <div className="w-[110px]">
+          <img src={Logo} alt='logo' />
+        </div>
 
-      {/* title */}
-      <div className='hidden sm:block text-3xl font-bold capitalize'>
-        my music collection
+        {/* title */}
+        <div className='hidden sm:block ml-3 text-3xl font-bold capitalize'>
+          my music collection
+        </div>
       </div>
 
       {/* menu */}
@@ -28,7 +28,7 @@ const Navbar = () => {
       </ul>
 
       {/* hamburger */}
-      <div onClick={handleClick} className='md:hidden z-10'>
+      <div onClick={() => setNav(val => !val)} className='md:hidden cursor-pointer z-10'>
         {nav ? <FaTimes /> : <FaBars />}
       </div>
 

@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const backend = () => axios.create({
+const server = axios.create({
   baseURL: 'http://localhost:4000/api',
   headers: {
     accept: 'application/json',
@@ -8,7 +8,7 @@ const backend = () => axios.create({
   }
 })
 
-export const getAlbums = () => backend({
+export const getAlbums = () => server({
   method: 'get',
-  url: 'v1/music'
+  url: 'v1/music',
 })
