@@ -18,24 +18,24 @@ Content-Type: application/json
 Prefer: return=representation
 
 {
-    "name": "oi",
-    "artist": "oi",
+    "name": "Appetite for Destruction",
+    "artist": "Guns N' Roses",
     "image": "https://www.example.com/some/dir/somefile.png",
     "songs": [
         {
             "number": 1,
-            "title": "it is what it is"
+            "title": "Paradise City"
         },
         {
             "number": 2,
-            "title": "it is what it is not"
+            "title": "Sweet Child of Mine"
         }
     ]
 }
 
 ###
 
-DELETE {{backend}}/{{musicapi}}/626017d3196044bd6a3a8941
+DELETE {{backend}}/{{musicapi}}/626e582cd8b5fde831ef987c
 
 
 ###
@@ -45,8 +45,8 @@ Content-Type: application/json
 Prefer: return=Minimal
 
 {
-    "rating": 2,
-    "favorite": true
+    "rating": 4,
+    "favorite": false
 }
 
 ###
